@@ -1093,6 +1093,7 @@ footer .social-icons a:hover {
 
 }
 /* --------------------------------------------------------------
+ /* --------------------------------------------------------------
    361 px – 480 px  (small phones) – make the hero look great
    -------------------------------------------------------------- */
 @media (min-width: 361px) and (max-width: 480px) {
@@ -1174,14 +1175,23 @@ footer .social-icons a:hover {
     }
 
     .personal-photo {
-        width: 120px;
-        height: 120px;
+        width: 160px;
+        height: 200px;
+        left: 30%;
+        border: 1px solid black;
+    }
+
+    .home-content p{
+        width: 300px;
+        justify-content: center;
     }
 
     .typing-text {
         min-width: 200px;
         font-size: 1.5rem;
+        left: 50px;
     }
+
 }
 
 /* Landscape Mobile (low height, wide width) */
@@ -1212,4 +1222,5 @@ footer .social-icons a:hover {
         width: 100px;
         height: 100px;
     }
+
 }
