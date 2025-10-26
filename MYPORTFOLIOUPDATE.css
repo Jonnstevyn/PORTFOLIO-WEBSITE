@@ -495,7 +495,7 @@ section .title::after{
     text-align: center;
     border-radius: 12px;
     padding: 30px 10px;
-    box-shadow: 0 5px 10px rgba(0,0,0.12);
+    box-shadow: 0 5px 10px rgb(151, 114, 114);
     cursor: default;
     color: white;
     transition: 0.4s ease;
@@ -1224,3 +1224,4 @@ footer .social-icons a:hover {
     }
 
 }
+
