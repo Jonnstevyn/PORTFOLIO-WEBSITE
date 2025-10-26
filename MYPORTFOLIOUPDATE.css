@@ -1,0 +1,1215 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+    text-decoration:none ;
+    border: none;
+    outline: none;
+    font-family: 'Poppins',sans-serif;
+    scroll-behavior: smooth;
+}
+
+html{
+    font-size: 62.5;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+    background-color: black;
+    color: white;
+}
+/* Custom Scrollbar css*/
+::-webkit-scrollbar{
+    width: 10px;
+}
+
+::-webkit-scrollbar-track{
+    background-color: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: #b74b4b;
+    border-radius: 12px;
+    transition:all 0.3s ease;
+}
+
+
+
+header{
+    margin-top: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 9%;
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+    filter: drop-shadow(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 3rem;
+    color: brown;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+.logo:hover {
+    transform:scale(1.1);
+}
+
+.ham-burger .cancel{
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    color: white;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+}
+
+nav a{
+    font: size 1.8rem;
+    color: white;
+    margin-left: 4rem;
+    font-weight: 500;
+    transition: 0.3s ease;
+    border-bottom: 3px solid transparent;
+}
+
+nav a:hover,
+nav a.active{
+    color: coral;
+    border-bottom: 3px solid #b74b4b;
+}
+/* Hamburger-controlled mobile nav + buttons - REPLACED */
+#menu-open-button,
+#menu-close-button {
+    display: none; /* hidden by default on desktop */
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 2.6rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 6px;
+    z-index: 200;
+}
+
+/* Close button specifics */
+#menu-close-button {
+    display: none;
+    position: absolute;
+    top: 1.1rem;
+    right: 1rem;
+}
+
+/* Mobile nav (hidden by default, shown when toggled) */
+@media (max-width: 995px) {
+    /* hamburger visible on mobile */
+    #menu-open-button {
+        display: block;
+        position: relative;
+        z-index: 210;
+    }
+
+    /* hide desktop nav normally */
+    .navbar {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 70%;
+        max-width: 320px;
+        border-left: 3px solid #b74b4b;
+        border-bottom: 3px solid #b74b4b;
+        border-bottom-left-radius: 2rem;
+        padding: 1.2rem;
+        background-color: #161616;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+        z-index: 190;
+    }
+
+    /* when menu active, show nav and close button */
+    body.show-mobile-menu .navbar {
+        display: block;
+    }
+
+    body.show-mobile-menu #menu-open-button {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    body.show-mobile-menu #menu-close-button {
+        display: block;
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .navbar a {
+        display: block;
+        font-size: 2rem;
+        margin: 1.2rem 0;
+        color: white;
+    }
+
+    .navbar a:hover,
+    .navbar a.active {
+        padding: 0.6rem;
+        border-radius: 0.6rem;
+        background: rgba(183,75,75,0.08);
+        color: coral;
+    }
+}
+
+/* Robot removal: Hide entire .home-img to remove blank space on small screens */
+@media (max-width: 768px) {
+    .home-img {
+        display: none;
+    }
+}
+/*To here*/
+section{
+    min-height: 100vh;
+    padding: 5rem 9% 5rem ;
+}
+
+.home{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8rem;
+    background-color: black;
+    /* KEY FIX: Set HOME as positioning context */
+    position: relative;
+    /* Ensure content is positioned above the robot */
+    z-index: 10;
+}
+
+.home-content h1{
+    font-size: 6rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+span{
+    color: #b74b4b;
+}
+
+.home-content h3{
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.home-content p{
+    font-size: 1.2rem;
+}
+
+.home-img{
+    /* Overrides the old flex child positioning for absolute overlay */
+    border-radius: 50%;
+    /* KEY FIX: Position the robot absolutely on the right */
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60%;
+    height: 100%;
+    /* KEY FIX: Lower Z-index to be behind content */
+    z-index: 5;
+    /* Ensure no original box-shadow interferes */
+    box-shadow: none; 
+}
+
+/* This rule is now irrelevant as it targeted an <img> tag, but keeping the block for safety */
+.home-img img{
+    position: relative;
+    width: 32vw;
+    border-radius: 50%;
+    box-shadow: 0 0 25px solid #b74b4b;
+    cursor: pointer;
+    transition: 0.2s linear;
+    
+}
+
+.home-img img:hover{
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+/* New rule for the Spline Viewer */
+.home-img .robot-3d {
+    width: 100%;
+    height: 100%;
+    max-height: 90vh; 
+    /* Remove original styles intended for the image */
+    border-radius: 0; 
+}
+
+/* --- PERSONAL PHOTO STYLES --- */
+.personal-photo {
+    position: absolute; /* Position it relative to the .home section */
+    top: 15%; /* Adjust as needed: 15% from the top of the .home section */
+    left: 9%; /* Adjust as needed: 9% from the left (aligns with text) */
+    width: 300px; /* Set desired width */
+    height: 400px; /* Set desired height (make it equal to width for a perfect circle) */
+    object-fit: cover; /* Ensures image covers the area without distortion */
+    border-radius: 50%; /* Makes the image circular */
+    border: 4px #854e06; /* Optional: Add a border matching your highlight color */
+    box-shadow: 0 0  #79081c; /* Optional: Add a subtle glow */
+    z-index: 20; /* Ensur20pxe it's above other elements if necessary */
+}
+
+ .personal-photo:hover {
+        box-shadow: 0 0 30px #b74b4b;
+        transform: scale(11.2rem);
+    }
+
+/* Ensure the text content is on top */
+.home-content {
+    /* Set max width to create space for the robot */
+    max-width: 50%;
+    /* Higher Z-index to ensure text is above the robot */
+    z-index: 15; 
+}
+
+
+.social-icons a{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    height: 4rem;
+    background-color: transparent;
+    border:0.2rem solid #b74b4b;
+    font-size: 2rem;
+    border-radius: 50%;
+    margin: 3rem 1.5rem 3rem;
+    transition: 0.3s ease;
+    color: rgb(8, 164, 242);
+    
+}
+
+.social-icons a:hover{
+    color: black;
+    transform: scale(1.3) translate(-5px);
+    background-color:#b74b4b;
+    box-shadow :0 0 25px #b74b4b;
+}
+
+.btn{
+    display: inline-block;
+    padding: 1rem 2.8rem;
+    background-color: black;
+    border-radius: 4rem;
+    font-size: 1.6rem;
+    color: #b74b4b;
+    letter-spacing: 0.3rem;
+    font-weight: 600;
+    border: 2px solid #b74b4b;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.btn:hover{
+    transform: scale3d(1.03);
+    background-color: #b74b4b;
+    color: black;
+    box-shadow: 0 0 25px #b74b4b;
+}
+
+.typing-text{
+    font-size: 18px;
+    font-weight: 500;
+    min-width: 280px;
+}
+
+.typing-text span{
+    position: relative;
+}
+
+.typing-text span::before{
+    content: "Software Developer";
+    color: #b74b4b;
+    animation: words 20s infinite;
+}
+
+.typing-text span::after{
+    content:"";
+    background-color: black;
+    position:absolute;
+    width: 10px;
+    height: 70px;
+    border-left: 3px solid black;
+    right: -8;
+    animation: cursor 0.6s infinite ;
+}
+section .title {
+    position: relative; /* positioning context for the two lines */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1.6rem; /* space for the two underline bars */
+}
+
+section .title span{
+    position: relative;
+    z-index: 2; /* ensure text sits above the lines */
+    color: white;
+    font-size: 30px;
+    font-weight: 600;
+    padding: 0.2rem 1rem;
+    display: inline-block;
+    background: transparent;
+}
+
+/* Larger (top) line — closer to the text and wider */
+section .title::before{
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 8px;                 /* closer to the text */
+    transform: translateX(-50%);
+    width: clamp(140px, 40%, 260px); /* larger/wider line */
+    height: 5px;
+    background: #b74b4b;
+    border-radius: 3px;
+    z-index: 1;
+}
+
+/* Smaller (bottom) line — slightly lower and shorter */
+section .title::after{
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0px;                 /* lower than the top line */
+    transform: translateX(-50%);
+    width: clamp(90px, 22%, 160px); /* smaller/shorter line */
+    height: 3px;
+    background: #b74b4b;
+    border-radius: 3px;
+    z-index: 1;
+}
+
+
+/*Skills*/
+.skills {
+    background-color: black;
+    color: white;
+}
+.skills .content {
+    padding: 40px 0;
+}
+
+.skills .skills-details{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.skills-details .text{
+    width: 50%;
+}
+
+.skills-details p{
+    color: white;
+    text-align: justify;
+}
+
+.skills .skills-details .experience{
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.skills-details .experience .num {
+    color: white;
+    font-size: 80px;
+}
+
+.skills-details .experience .exp {
+    color: white;
+    margin-left: 20px;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 6px;
+}
+
+.skills-details .boxes{
+    width: 45%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+.skills-details.box{
+    width: calc(100%/2-20px);
+    margin: 20px 0;
+}
+
+.skills-details .skills-topic{
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.skills-details .skills-topic:hover{
+    color: #e9b109;
+    font-size: 25px;
+    font-weight: 700;
+    transition: all 0.4s ease;
+}
+
+.skills-details .boxes {
+    font-size: 20px;
+    color: #b74b4b;
+}
+
+.skills-details .boxes .per{
+    font-size: 60px;
+    color: #b74b4b;
+}
+
+/*Services Section*/
+.services .boxes{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.services .boxes .box{
+    margin: 20px 0;
+    width: calc(100%/3-20px);
+    text-align: center;
+    border-radius: 12px;
+    padding: 30px 10px;
+    box-shadow: 0 5px 10px rgba(0,0,0.12);
+    cursor: default;
+    color: white;
+    transition: 0.4s ease;
+}
+
+.services .boxes .box:hover{
+    box-shadow: 0 10px 20px #b74b4b;
+    transform: translateY(-10px);
+}
+
+.services .boxes .box .icon{
+    height: 50px;
+    width: 50px;
+    background: #b74b4b;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+    font-size: 24px;
+    color: white;
+    margin: 0 auto 20px;
+    transition: all 0.4s ease;
+}
+
+.services .boxes .box:hover .icon{
+    background: black;
+    color: #b74b4b;
+    box-shadow: 0 0 25px #b74b4b;
+}
+
+.services .boxes .box .topic{
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.services .boxes .box p{
+    width: 375px;
+    font-size: 16px;
+    color: white;
+    text-align: justify;
+}
+
+.services .boxes .box:hover .topic,
+.services .boxes .box:hover p{
+    color: white;
+    transition: all 0.4s ease;
+}
+
+.services .boxes .box:hover .topic,
+.services .boxes .box:hover p{
+    color: white;
+}
+
+/*Contact Section*/
+.contact {
+    background-color: black;
+    color: white;
+}
+
+.contact .content {
+    padding: 40px 0;
+}
+
+.contact-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.contact-details .text {
+    flex: 1;
+}
+
+.contact-details .text .topic {
+    font-size: 25px;
+    font-weight: 600;
+    color: #b74b4b;
+    margin-bottom: 20px;
+}
+
+.contact-details .text p {
+    margin-bottom: 30px;
+}
+
+.contact-details .text button {
+    padding: 12px 30px;
+    background-color: #b74b4b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.contact-details .text button:hover {
+    background-color: black;
+    color: #b74b4b;
+    box-shadow: 0 0 25px #b74b4b;
+}
+
+.contact-details .info {
+    flex: 1;
+}
+
+.contact-details .info .box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.contact-details .info .box .icon {
+    width: 50px;
+    height: 50px;
+    background: #b74b4b;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+}
+
+.contact-details .info .box .icon i {
+    color: white;
+    font-size: 20px;
+}
+
+.contact-details .info .box .text h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.contact-details .info .box .text p {
+    font-size: 16px;
+    color: #b74b4b;
+}
+
+@media (max-width: 768px) {
+    .contact-details {
+        flex-direction: column;
+    }
+    
+    .contact-details .text,
+    .contact-details .info {
+        width: 100%;
+    }
+}
+
+
+/*Footer*/
+footer {
+    background-color: #b74b4b;
+    text-align: center;
+    padding: 20px 0;
+    color: white;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+}
+
+footer .footer-text span {
+    color: white;
+    font-weight: 500;
+}
+
+footer .social-icons {
+    margin: 15px 0;
+}
+
+footer .social-icons a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+    background-color: transparent;
+    border: 0.2rem solid white;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    margin: 0.5rem;
+    transition: 0.3s ease;
+    color: white;
+}
+
+footer .social-icons a:hover {
+    color: #b74b4b;
+    transform: scale(1.2);
+    background-color: black;
+    box-shadow: 0 0 15px rgb(8, 164, 242);
+}
+
+.footer-text, 
+.social-icons {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.scroll-button a{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #b74b4b;
+    color: white;
+    padding: 7px 12px;
+    font-size: 18px;                    
+    box-shadow: rgba(0,0,0.15);
+}
+
+@keyframes cursor{
+    to{
+        border-left: 3px solid #b74b4b;
+    }
+}
+
+@keyframes words{
+    0%, 20%{
+        content:"Web Developer";
+    }
+    21%,40%{
+        content:"Data Analyst";
+    }
+    41%, 60%{
+        content: "Web Designer";
+    }
+    61%, 80%{
+        content: "Chemistry Teacher";
+    }
+    81%, 100%{
+        content:"Mathematics Teacher"
+    }
+}
+
+@media(max-width:1000px){
+    .home{
+        gap: 4rem;
+    }
+}
+
+@media(max-width:995px){
+    /* Mobile styles: Revert to stacking */
+    .home{
+        flex-direction: column;
+        margin: 5rem 4rem;
+        position: relative;
+        z-index: 1; /* Reset z-index */
+    }
+
+    .home-content {
+        order: 2; /* Content below robot */
+        max-width: 100%;
+        text-align: center;
+        z-index: 10;
+    }
+    
+    .home-img {
+        order: 1; /* Robot above content */
+        /* Revert to relative/static flow */
+        position: relative;
+        top: auto;
+        transform: none;
+        width: 100%; 
+        height: 350px; 
+        margin-top: 4rem;
+        z-index: 5;
+    }
+    
+    .home-content h3{
+        font-size: 2.5rem;
+    }
+
+    .home-content h1{
+        font-size: 5rem;
+    }
+
+    .social-icons {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .btn {
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+
+
+/* --- Responsive Adjustments for Personal Photo --- 
+@media(max-width:995px){
+    .personal-photo {
+        position: relative; /* Change to relative positioning for mobile 
+        top: auto;
+        left: auto;
+        margin: 20px auto 40px auto; /* Center it and add some spacing 
+        display: block; /* Make it a block element to center with margin:auto 
+        order: 0; /* Place it at the very top of the stacked items 
+        width: 120px; /* Slightly smaller on mobile 
+        height: 120px;
+    }
+
+    /* Adjust home-content padding when photo is present 
+    .home-content {
+        padding-top: 2rem; /* Reduce initial padding if photo is now above it 
+    }
+}
+
+@media(max-width:480px){
+    .personal-photo {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+/* ============================================= */
+/*              RESPONSIVE MEDIA QUERIES          */
+/* ============================================= */
+
+/* Large Desktops (1200px and up) */
+@media (min-width: 1201px) {
+    .home {
+        gap: 8rem;
+    }
+    .home-img {
+        width: 60%;
+    }
+    .personal-photo {
+        width: 300px;
+        height: 400px;
+        left: 1%;
+    }
+    .home-content h1 {
+        font-size: 6rem;
+    }
+    .typing-text{
+        font-size: 3.5rem;
+        font-weight: 500;
+        width: 900px;
+        }
+     .social-icons {
+        /* 1. Sets up the Flexbox system */
+        display: flex; 
+        padding-bottom: 20px;
+        
+        /* 2. Arranges items horizontally (left to right) */
+        flex-direction: row; 
+        
+        /* 3. Centers the entire group horizontally */
+        justify-content: center; 
+        
+        /* 4. CRITICAL: Prevents wrapping to a new line on small screens */
+        flex-wrap: nowrap;      
+         
+    }
+    .social-icons a {
+        flex-shrink: 0; /* Prevents the icon from shrinking */
+        flex-grow: 0;   /* Prevents the icon from growing */
+        margin: 0 10px; /* Add horizontal spacing between icons */
+    }
+}
+
+/* Desktops & Laptops (991px - 1200px) */
+@media (max-width: 1200px) {
+    .home {
+        padding: 6rem 5%;
+        gap: 6rem;
+    }
+    .home-img .robot-3d {
+        max-height: 80vh;
+    }
+    .personal-photo {
+        width: 260px;
+        height: 340px;
+        top: 18%;
+        left: 1%;
+    }
+
+    .home-content h1 {
+        font-size: 4rem;
+    }
+    .typing-text{
+        font-size: 3rem;
+        font-weight: 500;
+        width: 660px;
+        }
+
+    .typing-text span{
+        position: relative;  
+    }
+
+ 
+   .social-icons {
+        /* 1. Sets up the Flexbox system */
+        display: flex; 
+        padding-bottom: 20px;
+        
+        /* 2. Arranges items horizontally (left to right) */
+        flex-direction: row; 
+        
+        /* 3. Centers the entire group horizontally */
+        justify-content: center; 
+        
+        /* 4. CRITICAL: Prevents wrapping to a new line on small screens */
+        flex-wrap: nowrap;      
+         
+    }
+    .social-icons a {
+        flex-shrink: 0; /* Prevents the icon from shrinking */
+        flex-grow: 0;   /* Prevents the icon from growing */
+        margin: 0 10px; /* Add horizontal spacing between icons */
+    }
+}
+
+/* Tablets & Small Laptops (768px - 991px) */
+@media (max-width: 991px) {
+    html {
+        font-size: 58%;
+    }
+
+    header {
+        padding: 1rem 5%;
+    }
+
+    section {
+        padding: 4rem 5%;
+    }
+
+    .home {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 10rem;
+        gap: 3rem;
+    }
+
+    .home-content {
+        max-width: 100%;
+        order: 2;
+        z-index: 15;
+    }
+
+    .home-img {
+        position: relative;
+        width: 100%;
+        height: 400px;
+        order: 1;
+        margin-top: 2rem;
+        z-index: 5;
+    }
+
+    .home-img .robot-3d {
+        width: 300px;
+        height: 300px;
+        margin: 0 auto;
+    }
+
+    .personal-photo {
+        position: relative;
+        width: 600px;
+        height: 700px;
+        margin: 0 auto 30px;
+        display: block;
+        order: 0;
+    }
+
+    .social-icons,
+    .btn {
+        justify-content: center;
+        margin: 2rem auto;
+    }
+
+    .btn {
+        display: block;
+        width: fit-content;
+    }
+
+    /* Skills & Services */
+    .skills-details,
+    .services .boxes,
+    .contact-details {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .skills-details .text,
+    .skills-details .boxes,
+    .services .boxes .box,
+    .contact-details .text,
+    .contact-details .info {
+        width: 100%;
+    }
+
+    .services .boxes .box {
+        width: 100%;
+        max-width: 400px;
+        margin: 15px auto;
+    }
+}
+
+/* Mobile Devices (481px - 768px) */
+@media (max-width: 768px) {
+    html {
+        font-size: 55%;
+    }
+
+    .home-content h1 {
+        font-size: 4.5rem;
+    }
+
+    .home-content h3 {
+        font-size: 2.6rem;
+    }
+
+    /* Make the main hero image larger */
+    .home-img {
+        width: 320px;
+        height: 420px;
+        margin: 0 auto;
+    }
+
+    /* Ensure 3D/robot element is visible and scaled up */
+    .robot-3d {
+        display: none;
+    }
+
+   /* --- Styles for Tablets and Small Desktops (768px down to 481px) --- */
+
+    .personal-photo {
+        /*
+         * Reworked for better mobile/tablet stacking.
+         * The image is now centered and smaller to fit above the text.
+         */
+        position: relative; /* Use relative position for flow when stacking */
+        top: 0; /* No need for top positioning if relative */
+        left: 40%; /* Start at 50% for centering */
+        transform: translateX(-50%); /* Pull back 50% of its own width to truly center */
+        
+        /* Scale down the size using viewport width units */
+        width: 60vw; /* 40% of the viewport width */
+        height: 100vw; /* Keep it a circle by matching width/height */
+        
+        /* Ensure the border and shadow are maintained */
+        border: 4px solid #854306;
+        box-shadow: 0 0 20px #79081c;
+    }
+
+    .personal-photo:hover {
+        box-shadow: 0 0 30px #b74b4b;
+        transform: scale(11.2rem);
+    }
+
+
+    .typing-text {
+        max-width: 300px;
+        font-size: 1.6rem;
+    }
+
+    .typing-text span::after {
+        height: 36px;
+    }
+
+    .home-content p {
+        font-size: 16px;
+    }
+
+    .social-icons a {
+        width: 4.6rem;
+        height: 4.6rem;
+        font-size: 1.8rem;
+    }
+
+    .scroll-button a {
+        bottom: 15px;
+        right: 15px;
+        padding: 6px 10px;
+        font-size: 16px;
+    }
+
+    .skills-details p{
+        font-size: 16px;
+    }
+    .contact .text p {
+        font-size: 1.5rem;
+    }
+    .services .boxes,
+    .box{
+    width: 340px;
+    padding: 5px;
+    }
+    
+    .services .boxes .box p{
+    width: 320px;
+    padding: 5px;
+    }
+    
+
+}
+/* --------------------------------------------------------------
+   361 px – 480 px  (small phones) – make the hero look great
+   -------------------------------------------------------------- */
+@media (min-width: 361px) and (max-width: 480px) {
+
+  /* 1. Personal photo – a little bigger but still fits */
+  .personal-photo {
+    width:  200px !important;
+    height: 360px !important;
+    margin: 1.5rem auto 2rem !important;   /* centre + breathing room */
+    border: 1px solid #b74b4b;
+    box-shadow: 0 0 18px rgba(183,75,75,.7);
+    left: 30% !important;
+  }
+
+  /* 2. Text – keep it readable but not cramped */
+  .home-content h1 { font-size: 4.2rem !important; }
+  .home-content h3 { font-size: 2.4rem !important; }
+  .home-content p  { font-size: 1.45rem !important; line-height: 1.5; }
+
+  /* 3. Social icons & button – a bit smaller, nicely spaced */
+  .social-icons a {
+    width: 3.4rem;
+    height: 3.4rem;
+    font-size: 1.7rem;
+    margin: 0 .6rem;
+  }
+  .btn {
+    padding: .9rem 2.2rem;
+    font-size: 1.453rem;
+  }
+
+  /* 4. Hamburger button – keep it visible and comfortable to tap */
+  #menu-open-button,
+  #menu-close-button {
+    font-size: 2.8rem;
+  }
+
+  /* 5. Overall home padding – give the content a little air */
+  .home {
+    padding: 8rem 4% 4rem;
+    gap: 1.5rem;
+  }
+
+  .typing-text {
+    width: 300px;
+    font-size: 1.7rem;
+  }
+    /* 6. Skills & Services */
+    .services .boxes,
+    .box{
+    width: 360px;
+    padding: 5px;
+    }
+    
+    .services .boxes .box p{
+    width: 340px;
+    padding: 5px;
+    }
+}
+
+
+/* Extra Small Mobile (≤360px) */
+@media (max-width: 360px) {
+    .home-content h1 {
+        font-size: 3.4rem;
+    }
+
+    .home-content h3 {
+        font-size: 2rem;
+    }
+
+    .robot-3d {
+        display: none;
+    }
+
+    .home-img  {
+        width: 200px;
+        height: 200px;
+    }
+
+    .personal-photo {
+        width: 120px;
+        height: 120px;
+    }
+
+    .typing-text {
+        min-width: 200px;
+        font-size: 1.5rem;
+    }
+}
+
+/* Landscape Mobile (low height, wide width) */
+@media (max-height: 500px) and (orientation: landscape) {
+    .home {
+        padding-top: 6rem;
+        min-height: auto;
+    }
+
+    .home-content h1 {
+        font-size: 3.5rem;
+    }
+
+    .home-content h3 {
+        font-size: 2rem;
+    }
+
+    .home-img {
+        height: 240px;
+    }
+
+    .home-img .robot-3d {
+        width: 180px;
+        height: 180px;
+    }
+
+    .personal-photo {
+        width: 100px;
+        height: 100px;
+    }
+}
